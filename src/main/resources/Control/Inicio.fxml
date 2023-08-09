@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.ControlInicio">
+   <children>
+      <Button fx:id="btnAgendar" layoutX="78.0" layoutY="143.0" mnemonicParsing="false" onAction="#dirigirseAgendar" prefHeight="42.0" prefWidth="142.0" style="-fx-background-color: #FFA500;" text="Agendar" />
+      <Button fx:id="btnBuscar" layoutX="273.0" layoutY="143.0" mnemonicParsing="false" onAction="#dirigirseBuscar" prefHeight="42.0" prefWidth="142.0" style="-fx-background-color: #FFA500;" text="Buscar" />
+      <Text layoutX="172.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Date">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

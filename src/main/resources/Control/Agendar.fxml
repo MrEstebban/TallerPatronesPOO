@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Control.ControlAgendar">
+   <children>
+      <Text layoutX="43.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Agendar Cita" wrappingWidth="174.50390625">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Text>
+      <Line endX="100.0" layoutX="144.0" layoutY="67.0" startX="-100.0" />
+      <Text layoutX="77.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cédula" />
+      <Text layoutX="77.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombres" />
+      <Text layoutX="77.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellidos" />
+      <Text layoutX="77.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad" />
+      <Text layoutX="77.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha - Hora" />
+      <TextField fx:id="boxCedula" layoutX="164.0" layoutY="99.0" prefHeight="25.0" prefWidth="341.0" />
+      <TextField fx:id="boxNombre" layoutX="164.0" layoutY="146.0" prefHeight="25.0" prefWidth="341.0" />
+      <TextField fx:id="boxApellido" layoutX="164.0" layoutY="189.0" prefHeight="25.0" prefWidth="341.0" />
+      <TextField fx:id="boxEdad" layoutX="164.0" layoutY="230.0" prefHeight="25.0" prefWidth="341.0" />
+      <DatePicker fx:id="boxFecha" layoutX="164.0" layoutY="275.0" />
+      <Button fx:id="btnRegistrar" layoutX="229.0" layoutY="332.0" mnemonicParsing="false" onAction="#finalizarRegistro" prefHeight="31.0" prefWidth="142.0" style="-fx-background-color: #FFA500;" text="Registrar" />
+      <ChoiceBox fx:id="boxHora" layoutX="355.0" layoutY="275.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
