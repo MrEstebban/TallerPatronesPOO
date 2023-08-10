@@ -21,6 +21,10 @@ public class CitaMedica {
         this.hora = hora;
     }
 
+    public CitaMedica() {
+
+    }
+
     public String getCedula() {
         return cedula;
     }
