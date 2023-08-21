@@ -1,6 +1,8 @@
 package Control;
 
+import DAO.DAOCitas;
 import Entity.CitaMedica;
+import Utilities.UtilidadesAcceso;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class ControlAgendar {
 
@@ -55,6 +58,7 @@ public class ControlAgendar {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Inicio.fxml"));
             Parent root = loader.load();
             ControlInicio controlador = loader.getController();
+            DAOCitas daoCitas = new DAOCitas();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -62,12 +66,17 @@ public class ControlAgendar {
             stage.setScene(scene);
             stage.show();
 
-            CitaMedica cita = new CitaMedica(boxCedula.getText(), boxApellido.getText(), boxNombre.getText(), Integer.parseInt(boxEdad.getText()), boxFecha.getValue(), boxHora.getValue());
+            List<CitaMedica> art = daoCitas.findAllCitas();
+            long totalregistros = art.size()+1;
+            CitaMedica cita = new CitaMedica(totalregistros ,boxCedula.getText(), boxApellido.getText(), boxNombre.getText(), Integer.parseInt(boxEdad.getText()), boxFecha.getValue(), boxHora.getValue());
 
             stage.setOnCloseRequest(e -> controlador.closeWindow());
 
             Stage myStage = (Stage) this.btnRegistrar.getScene().getWindow();
             myStage.close();
+
+            // Registar en la BBDD
+            daoCitas.saveCita(cita);
 
             String fechaFormato = cita.getFecha().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             String carpetaFecha = "Historial_Medico/" + fechaFormato;
@@ -80,10 +89,8 @@ public class ControlAgendar {
 
             // Convierte el objeto cita a JSON y escribe en el archivo dentro de la carpeta
             objectMapper.writeValue(new File(archivoCedula), cita);
-            System.out.println("Cita registrada en " + archivoCedula);
 
-            System.out.println("Se ha realizado el registro exitosamente");
-            System.out.println();
+            UtilidadesAcceso.abrirVentanaInfo(event, "Cita registrada correctamente");
 
         } catch (IOException e) {
             System.out.println("Error al registrar cita"+e.getMessage());

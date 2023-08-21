@@ -1,6 +1,8 @@
 package Control;
 
+import DAO.DAOCitas;
 import Entity.CitaMedica;
+import Utilities.UtilidadesAcceso;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -37,17 +39,26 @@ public class ControlBuscar {
         this.tablaMostrar.getItems().clear();
 
         if(boxFechaBusqueda.getValue() != null) {
-            String carpetaFecha = "Historial_Medico/" + boxFechaBusqueda.getValue().toString();
+            //Leer de la BBDD
+            DAOCitas daoCitas = new DAOCitas();
+            List<CitaMedica> citas = daoCitas.findAllCitasByDate(boxFechaBusqueda.getValue());
+            if(citas.size() > 0){
+                this.llenarTablaConDatos(citas);
+            }else{
+                UtilidadesAcceso.abrirVentanaInfo(event, "No se encontraron registros para la fecha seleccionada");
+            }
+
+            /*String carpetaFecha = "Historial_Medico/" + boxFechaBusqueda.getValue().toString();
             File carpetaFechaDir = new File(carpetaFecha);
             if (carpetaFechaDir.exists()) {
                 List<CitaMedica> citas = this.buscarArchivosCitasEnCarpeta(carpetaFecha);
                 this.llenarTablaConDatos(citas);
             }else{
                 this.abrirVentanaInfo(event);
-            }
+            }*/
         }else{
             System.out.println("No se ha seleccionado una fecha");
-            this.abrirVentanaInfo(event);
+            UtilidadesAcceso.abrirVentanaInfo(event, "No se ha seleccionado una fecha");
         }
     }
 
@@ -71,20 +82,6 @@ public class ControlBuscar {
         this.tablaMostrar.getItems().addAll(citas);
     }
 
-    @FXML
-    private void abrirVentanaInfo(ActionEvent event) {
-
-        Alert dialog = new Alert(Alert.AlertType.INFORMATION);
-        dialog.setTitle("Información");
-        dialog.setHeaderText("No se encontraron registros");
-        ButtonType resultado = dialog.showAndWait().orElse(ButtonType.CANCEL);
-
-        if (resultado == ButtonType.OK) {
-            System.out.println("Usuario eligió OK");
-        }
-
-    }
-
     private List<CitaMedica> buscarArchivosCitasEnCarpeta(String ruta){
         ObjectMapper objectMapper = new ObjectMapper();
         //Register the datatype support offered by jsr310 library into you objectmapper object, this can be done by following :
@@ -106,7 +103,7 @@ public class ControlBuscar {
                 }
             }
         }else{
-            this.abrirVentanaInfo(new ActionEvent());
+            UtilidadesAcceso.abrirVentanaInfo(new ActionEvent(), "No se encontraron registros para la fecha seleccionada");
         }
 
         return citas;

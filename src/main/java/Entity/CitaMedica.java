@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 
 public class CitaMedica {
+
+    private Long id;
     private String cedula;
     private String apellido;
     private String nombre;
@@ -12,7 +14,8 @@ public class CitaMedica {
     private LocalDate fecha;
     private String hora;
 
-    public CitaMedica(String cedula, String apellido, String nombre, int edad, LocalDate fecha, String hora) {
+    public CitaMedica(Long id, String cedula, String apellido, String nombre, int edad, LocalDate fecha, String hora) {
+        this.id = id;
         this.cedula = cedula;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -23,6 +26,17 @@ public class CitaMedica {
 
     public CitaMedica() {
 
+    }
+
+    public CitaMedica(String text, String text1, String text2, int parseInt, LocalDate value, String value1) {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCedula() {
